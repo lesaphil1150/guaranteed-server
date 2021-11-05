@@ -14,7 +14,7 @@ app.use("/warranty", controllers.Warranty);
 
 sequelize
   .authenticate()
-  .then(() => sequelize.sync())
+  .then(() => sequelize.sync({ force: true }))
   .then(() => {
     app.listen(process.env.PORT, function () {
       console.log(`The app is running on ${process.env.PORT}`);
