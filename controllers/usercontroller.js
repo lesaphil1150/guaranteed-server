@@ -35,17 +35,17 @@ router.post("/signup", function (req, res) {
 router.post("/login", function (req, res) {
   User.findOne({ where: { email: req.body.email } })
     .then(function loginSuccess(User) {
-      if (User) {
+      if (user) {
         bcrypt.compare(
           req.body.password,
-          User.password,
+          user.password,
           function (err, matches) {
             if (matches) {
-              let token = jwt.sign({ id: User.id }, process.env.JWT_SECRET, {
+              let token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
                 expiresIn: 60 * 60 * 24,
               });
               res.status(200).json({
-                User: User,
+                user: user,
                 message: "User successfully logged in!",
                 sessionToken: token,
               });
