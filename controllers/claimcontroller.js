@@ -48,10 +48,7 @@ router.get("/mine", validateSession, (req, res) => {
 });
 
 router.get("/getall", validateSession, (req, res) => {
-  Claim.findAll({
-    // where: { userId: req.user.id },
-    // include: "user",
-  })
+  Claim.findAll({})
     .then((Claim) => res.status(200).json(Claim))
     .catch((err) => res.status(500).json({ error: err }));
 });
